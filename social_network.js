@@ -33,18 +33,41 @@ var data = {
 
 
 //List everyone and for each of them, list the names of who they follow and who follows them
+function whoIFollow(id){ //f01
+  var list = data[id].follows;
+  for (var i = 0; i < list.length; i++) {
+    list.splice(i,1,data[list[i]].name);
+  }
+    return list;
+}
+
+function whoFollowsMe(id){
+  var keys = Object.keys(data);
+  for (var j in keys){
+    console.log(keys.indexOf(id));
+
+  }
+
+}
+
 function listFollowers() {  //name: names
-  for (var person in data) {
-    var result = data[person].name + " follows: ";
-    var follows = data[person].follows;
-    for (var i = 0; i < follows.length; i++) {
-      follows.splice(i,1,data[follows[i]].name);
-    }
-     console.log(result + follows.join());
+  var keys = Object.keys(data);
+
+  for (var i = 0; i < keys.length; i++) {
+    var result = data[keys[i]].name + " follows: ";
+
+    var follows = whoIFollow(keys[i]);
+    var follwers = whoFollowsMe(keys[i]);
+//    result += follows.join();
+
+
+    console.log(result);
   }
 }
 
 listFollowers();
+
+
 
 
 
